@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Todos from './components/Todos';
+import ListOfThingsTodo from './components/Todos';
 import './App.css';
 
 class App extends Component {
@@ -26,7 +26,21 @@ class App extends Component {
     // console.log(this.state.todos)
     return (
       <div className="App">
-        <Todos todos={this.state.todos} />
+        <ListOfThingsTodo items={this.state.todos} toggleItem={
+          (item) => {
+            const newState = this.state.todos.map((todoItem) => {
+              if (todoItem.id === item.id) {
+                return {
+                  ...item,
+                  completed:!item.completed
+                }
+              }else {
+                return todoItem
+              }
+            })
+            this.setState({todos:newState})
+          }
+        } />
       </div>
     );
   }
